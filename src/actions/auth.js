@@ -13,20 +13,20 @@ export const userLoggedOut = () => ({
 
 export const login = credentials => dispatch =>
   api.user.login(credentials).then(user => {
-    localStorage.bookwormJWT = user.token;
+    localStorage.DDAdventuresLeagueHub = user.token;
     setAuthorizationHeader(user.token);
-    dispatch(userLoggedIn(user));
+    dispatch(userLoggedIn({ ...user, loaded: true }));
   });
 
 export const logout = () => dispatch => {
-  localStorage.removeItem("bookwormJWT");
+  localStorage.removeItem("DDAdventuresLeagueHub");
   setAuthorizationHeader();
   dispatch(userLoggedOut());
 };
 
 export const confirm = token => dispatch =>
   api.user.confirm(token).then(user => {
-    localStorage.bookwormJWT = user.token;
+    localStorage.DDAdventuresLeagueHub = user.token;
     dispatch(userLoggedIn(user));
   });
 
